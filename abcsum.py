@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
 class strtools:
 
     def __init__(self,word):
@@ -49,16 +43,4 @@ class strtools:
                 pass
         print("{} adet büyük harf var".format(self.sayac["büyük"]))
         print("{} adet küçük harf var".format(self.sayac["küçük"]))
-
-
-
-
-
-
-
-
-
-
-
-
 
