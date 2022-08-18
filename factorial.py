@@ -1,33 +1,23 @@
-
-
-
-
-
-
-fakto=int(input("lütfen faktoriyel hesaplanacak sayıyı giriniz : "))
-
-
-
+fakto = int(input("lütfen faktoriyel hesaplanacak sayıyı giriniz:\n"))
 
 
 def faktohesapla(x):
-    sayac=1
-    if x == 0 :
-
+    sayac = 1
+    if x == 0:
         return 1
-
     else:
-        for i in range(1,x+1):
-            sayac=sayac*i
+        for i in range(1, x+1):
+            sayac *= i
 
-        print("{} sayısının faktoriyeli : ".format(x),sayac)
-
-sonuc=faktohesapla(fakto)
+        return sayac
 
 
-print("verdiğiniz faktoriyelin sonucu ",sonuc)
+sonuc = faktohesapla(fakto)
 
 
+print(f"verdiğiniz faktoriyelin sonucu: {sonuc}")
 
+
+# Sorry, I don't know your language so I don't understand variable names. I tweaked your code a bit
 
 
