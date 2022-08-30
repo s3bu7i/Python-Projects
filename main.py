@@ -1,27 +1,52 @@
 
-import uuid
-import hashlib
+import constants as keys
+from telegram.ext import *
+import responses as R
 
-def hash_pass(password):
-    salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest + ":" + salt
+print("Bot started...")
 
-def check_pass(hash_password,user_pass):
-    password,salt = hash_password.split(':')
-    return password == hash.sha256(salt.encode() + user_pass.encode().hexdigest)
+def start_command(update, context):
+    update.message.reply_text('Hello! Welcome To AreteBot :)')
 
-
-new_pass = input("Please enter a password :")
-hash_password = hash_pass(new_pass)
-
-print("the string to store in the db is :" + hash_password)
-
-old_pass = input("now please enter the password again to check :")
-
-if check_pass(hash_password,old_pass):
-    print("you entered the right password...")
+def help_command(update, context):
+    update.message.reply_text("""
+    The following commands are available:
     
-else:
-    print("passwords to not much...")
+    /start -> Welcome Message
+    /help -> This Message
+    /content -> Information About AreteBot Content
+    /contact -> Information About Contact
+                         
+    """)
 
+def content(update, context):
+    update.message.reply_text("With this bot you can access many scientific articles. You can view articles on both scientific and philosophical topics.")
+
+def contact(update, context):
+    update.message.reply_text("You can contact the creator -> @the_sbh")
+
+def handle_message(update, context):
+    text = str(update.message.text).lower()
+    response = R.sample_responses(text)
     
+    update.message.reply_text(response)
+    
+def error(update, context):
+    print(f"Update {update} caused error {context.error}")
+    
+def main():
+    updater = Updater(keys.API_KEY, use_context = True)
+    dp = updater.dispatcher
+    
+    dp.add_handler(CommandHandler("start", start_command))
+    dp.add_handler(CommandHandler("start", help_command))
+    
+    dp.add_handler(MessageHandler(Filters.text, handle_message))
+    
+    dp.add_error_handler(error)
+    updater.start_polling()
+    updater.idle()
+    
+main()
+                   
+
