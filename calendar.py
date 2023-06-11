@@ -1,22 +1,21 @@
-from tkinter import *
-from tkcalendar import *
-import time
+import calendar
 
+# Get user input for the year and month
+year = int(input("Enter the year: "))
+month = int(input("Enter the month: "))
 
-root =Tk()
+# Create a calendar for the given year and month
+cal = calendar.monthcalendar(year, month)
 
-def selectDate():
-    myDate = mycal.get_date()
-    selectedDate = Label(text=myDate)
-    selectedDate.pack(padx=2, pady=2)
+# Print the calendar
+print(calendar.month_name[month], year)
+print("Mo Tu We Th Fr Sa Su")
 
-mycal=Calendar(root, setmode="day", date_pattern="d/m/yy")
-mycal.pack(padx=15, pady=15)
-
-open_cal=Button(root, text="select Date", command=selectDate)
-open_cal.pack(padx=15,pady=15)
-
-root.geometry("300x300")
-root.title("Calendar")
-root.configure(bg="lightblue")
-
+for week in cal:
+    line = ""
+    for day in week:
+        if day != 0:
+            line += f"{day:2d} "
+        else:
+            line += "   "
+    print(line)
